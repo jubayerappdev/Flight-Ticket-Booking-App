@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.creativeitinstitute.flightticketbookingapp.Activities.Splash
 
 import android.content.Intent
@@ -14,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -31,6 +34,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.creativeitinstitute.flightticketbookingapp.MainActivity
 import com.creativeitinstitute.flightticketbookingapp.R
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +51,7 @@ enableEdgeToEdge()
 @Composable
 @Preview
 fun SplashScreen(onGetStartedClick:()-> Unit={}){
+    StatusTopBarColor()
     Column (modifier = Modifier.fillMaxSize()){
         ConstraintLayout (){
             val (backgroundImg, title, subTitle, startBtn) = createRefs()
@@ -99,5 +104,16 @@ fun SplashScreen(onGetStartedClick:()-> Unit={}){
                 GradientButton(onClick = onGetStartedClick, "Get Started",32)
             }
         }
+    }
+}
+
+@Composable
+fun StatusTopBarColor(){
+    val systemUiController = rememberSystemUiController()
+    SideEffect {
+        systemUiController.setSystemBarsColor(
+            color= Color.Transparent,
+            darkIcons = false
+        )
     }
 }
